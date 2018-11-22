@@ -1,9 +1,14 @@
-<p>
-  recipe for {{ name }} added on {{ dateAdded | date: 'longDate' }}
-</p>
-Ingredients:
-<ul>
-  <li *ngFor="let ingredient of ingredients">
-    <app-ingredient [name]="ingredient"></app-ingredient>
-  </li>
-</ul>
+<div class="ui card">
+  <div class="content">
+    <a class="header">{{ recipe.name }}</a>
+    <div class="meta">
+      <span class="date">added on {{ recipe.dateAdded | date }}</span>
+    </div>
+    <ul class="ui list">
+      <li *ngFor="let ingredient of recipe.ingredients">
+        <app-ingredient [name]="ingredient"></app-ingredient>
+      </li>
+    </ul>
+  </div>
+</div>
+

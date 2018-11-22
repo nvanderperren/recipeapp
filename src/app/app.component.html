@@ -1,7 +1,12 @@
-<div style="text-align: center">
-  <h1>Welcome to {{ title }}!!</h1>
-</div>
-<div>
-  <app-recipe></app-recipe>
+<div class="ui container">
+  <div class="ui basic segment">
+      <app-add-recipe (newRecipe)="newRecipeAdded($event)"></app-add-recipe>
+  </div>
+  <div class="ui segment">
+    <div class="ui cards">
+        <app-recipe *ngFor="let localRecipe of recipes" [recipe]="localRecipe"></app-recipe>
+    </div>
+  </div>
+
 </div>
 

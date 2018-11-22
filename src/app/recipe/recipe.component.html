@@ -1,3 +1,9 @@
 <p>
-  recipe works!
+  recipe for {{ name }} added on {{ dateAdded | date: 'longDate' }}
 </p>
+Ingredients:
+<ul>
+  <li *ngFor="let ingredient of ingredients">
+    {{ ingredient }}
+  </li>
+</ul>

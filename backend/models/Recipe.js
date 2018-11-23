@@ -5,6 +5,6 @@ var RecipeSchema = new mongoose.Schema({
     ingredients: [String],
     created: Date
 
-})
+});
 
 mongoose.model('Recipe', RecipeSchema)

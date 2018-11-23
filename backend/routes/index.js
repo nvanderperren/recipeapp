@@ -15,4 +15,13 @@ router.get('/API/recipes/', function (req, res, next) {
     });
 });
 
+router.post('/API/recipes/', function (req, res, next) {
+    console.log(req.body);
+    let recipe = new Recipe(req.body);
+    recipe.save(function (err, record) {
+        if (err) { return next(err); }
+        res.json(record);
+    });
+});
+
 module.exports = router;

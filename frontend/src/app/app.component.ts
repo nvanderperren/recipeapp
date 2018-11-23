@@ -40,6 +40,7 @@ export class AppComponent implements OnInit {
     }
 
     newRecipeAdded(recipe) {
+        console.log(recipe.name);
         this._recipeDataService.addNewRecipe(recipe).subscribe(
             item => this._recipes.push(item)
         );

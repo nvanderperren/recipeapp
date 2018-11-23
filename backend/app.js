@@ -8,6 +8,7 @@ var router = express.Router();
 //database
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/recipeapp', { useNewUrlParser: true });
+require('./models/Ingredient');
 require('./models/Recipe');
 
 var indexRouter = require('./routes/index');

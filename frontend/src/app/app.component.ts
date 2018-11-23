@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Recipe } from './recipe/recipe.model';
 import { RecipeDataService } from './recipe-data.service';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { distinctUntilChanged, debounceTime, map } from 'rxjs/operators';
 
 @Component({
@@ -10,14 +10,19 @@ import { distinctUntilChanged, debounceTime, map } from 'rxjs/operators';
   styleUrls: ['./app.component.css'],
   providers: [RecipeDataService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-  private _recipes: Recipe[];
-  public filterRecipeName: string;
-  public filterRecipe$ = new Subject<string>();
+    private _recipes: Recipe[];
+    public filterRecipeName: string;
+    public filterRecipe$ = new Subject<string>();
+
+    ngOnInit(): void {
+        this._recipeDataService.recipes.subscribe(
+            items => this._recipes = items
+        );
+    }
 
   constructor(private _recipeDataService: RecipeDataService) {
-    this._recipes = this._recipeDataService.recipes;
     this.filterRecipe$
       .pipe(
         distinctUntilChanged(),
@@ -35,7 +40,9 @@ export class AppComponent {
   }
 
   newRecipeAdded(recipe) {
-    this._recipeDataService.addNewRecipe(recipe);
+      this._recipeDataService.addNewRecipe(recipe).subscribe(
+          item => this._recipes.push(item)
+    );
   }
 
   applyFilter(filter: string) {

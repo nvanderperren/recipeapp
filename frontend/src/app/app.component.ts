@@ -22,31 +22,41 @@ export class AppComponent implements OnInit {
         );
     }
 
-  constructor(private _recipeDataService: RecipeDataService) {
-    this.filterRecipe$
-      .pipe(
-        distinctUntilChanged(),
-        debounceTime(400),
-        map(val => val.toLowerCase())
+    constructor(private _recipeDataService: RecipeDataService) {
+        this.filterRecipe$
+        .pipe(
+            distinctUntilChanged(),
+            debounceTime(400),
+            map(val => val.toLowerCase())
 
-      )
-      .subscribe(
-      val => this.filterRecipeName = val
-    );
-  }
+        )
+        .subscribe(
+        val => this.filterRecipeName = val
+        );
+    }
 
-  get recipes() {
-    return this._recipes;
-  }
+    get recipes() {
+        return this._recipes;
+    }
 
-  newRecipeAdded(recipe) {
-      this._recipeDataService.addNewRecipe(recipe).subscribe(
-          item => this._recipes.push(item)
-    );
-  }
+    newRecipeAdded(recipe) {
+        this._recipeDataService.addNewRecipe(recipe).subscribe(
+            item => this._recipes.push(item)
+        );
+    }
 
-  applyFilter(filter: string) {
-    this.filterRecipeName = filter;
-  }
+    applyFilter(filter: string) {
+        this.filterRecipeName = filter;
+    }
+
+    removeRecipe(recipe: Recipe) {
+        this._recipeDataService
+            .removeRecipe(recipe)
+            .subscribe(item => (
+                this._recipes = this._recipes.filter(val =>
+                    item.id !== val.id)
+            ));
+    }
+
 
 }

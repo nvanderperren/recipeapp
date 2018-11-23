@@ -14,7 +14,8 @@
         <div class="ui cards">
             <app-recipe *ngFor="let localRecipe of recipes |
             recipeFilter:filterRecipeName"
-            [recipe]="localRecipe"></app-recipe>
+            [recipe]="localRecipe"
+            (deleteRecipe)="removeRecipe($event)"></app-recipe>
         </div>
     </div>
   </div>

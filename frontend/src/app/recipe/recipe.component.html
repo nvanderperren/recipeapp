@@ -6,7 +6,7 @@
     </div>
     <ul class="ui list">
       <li *ngFor="let ingredient of recipe.ingredients">
-        <app-ingredient [name]="ingredient"></app-ingredient>
+        <app-ingredient [ingredient]="ingredient"></app-ingredient>
       </li>
     </ul>
     <button class="ui icon button" (click)="removeRecipe()">

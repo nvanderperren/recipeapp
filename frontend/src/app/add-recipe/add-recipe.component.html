@@ -1,14 +1,34 @@
-<form [formGroup]="recipe" class="ui form"
-(ngSubmit)="onSubmit()">
-  <h3 class="ui header">Add recipe</h3>
-  <div class="field">
-    <label for="name_id">Name:</label>
-    <input type="text" id='name_id' formControlName="name" #spy>
-  </div>
-  <div *ngIf='recipe.get("name").errors?.required &&
-  recipe.get("name").touched'
-  class="ui pointing red basic label">Error! this is required</div>
-  <button type="submit" class="ui positive right floated button">
-    Add recipe
-  </button>
-</form>
+<form class="ui form" [formGroup]='recipe' (ngSubmit)='onSubmit()'>
+        <h3 class="ui dividing header">Add recipe</h3>
+        <div class="field">
+          <label for="name_id">name</label>
+          <input id="name" name="name_id" formControlName='name'>
+        </div>
+
+        <div class="field">
+          <label for="ingredient_name">ingredients</label>
+          <div formArrayName='ingredients' *ngFor='let item of ingredients.controls;
+              let i = index'>
+            <div [formGroupName]='i'>
+              <div class='three fields'>
+                <div class="field">
+                  <input type="text" id="ingredient_amount" formControlName='amount' placeholder="amount">
+                </div>
+                <div class="field">
+                  <select class='ui fluid dropdown' id="ingredient_unittype" formControlName='unit'>
+                    <option *ngFor='let type of unitTypes' [value]='type'>
+                      {{type}}
+                    </option>
+                  </select>
+                </div>
+                <div class="field">
+                  <input type="text" id="ingredient_name" formControlName='ingredientname' placeholder="name of ingredient">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type='submit' class="ui positive right button">
+          add recipe
+        </button>
+      </form>

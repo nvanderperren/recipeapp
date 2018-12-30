@@ -1,9 +1,11 @@
+import { Ingredient } from '../ingredient/ingredient.model';
+
 export class Recipe {
 
     private _id: string;
     private _name: string;
     private _dateAdded: Date;
-    private _ingredients = new Array<string>();
+    private _ingredients: Ingredient[];
 
     static fromJSON(json: any): Recipe {
         const record = new Recipe(json.name, json.ingredients, json.created);
@@ -12,7 +14,7 @@ export class Recipe {
 
     }
 
-    constructor(name: string, ingredients: string[] = [],
+    constructor(name: string, ingredients: Ingredient[] = [],
         date = null) {
         this._name = name;
         this._ingredients = ingredients;
@@ -31,12 +33,12 @@ export class Recipe {
         return this._dateAdded;
     }
 
-    get ingredients(): string[] {
+    get ingredients(): Ingredient[] {
         return this._ingredients;
     }
 
-    addIngredient(name: string, amount?: number, unit?: string) {
-        this._ingredients.push(`${amount || 1} ${unit || ''} ${name}`);
+    addIngredient(ingredient: Ingredient) {
+        this._ingredients.push(ingredient);
     }
 
     toJSON() {

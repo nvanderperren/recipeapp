@@ -44,4 +44,8 @@ export class RecipeDataService {
             map(Ingredient.fromJSON));
     }
 
+  getRecipe(id: string): Observable<Recipe> {
+    return this.http.get(`${this._appUrl}/recipe/${id}`).pipe(map(Recipe.fromJSON));
+  }
+
 }

@@ -1,0 +1,13 @@
+<div class="ui card">
+  <div class="content">
+    <a class="header">detailed recipe for {{ recipe.name }}</a>
+    <div class="meta">
+      <span class="date">added on {{recipe.dateAdded | date}}</span>
+    </div>
+    <ul class="ui list">
+      <li *ngFor='let ing of recipe.ingredients'>
+        <app-ingredient [ingredient]='ing'></app-ingredient>
+      </li>
+    </ul>
+  </div>
+</div>

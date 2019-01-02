@@ -1,23 +1,9 @@
 <div class="ui container">
-  <div class="ui basic segment">
-      <app-add-recipe (newRecipe)="newRecipeAdded($event)"></app-add-recipe>
+  <div class="ui two item menu">
+    <a class='item' routerLinkActive='active' routerLink="/recipe-list">Recipes</a>
+    <a class='item' [routerLink]="['/add-recipe']" routerLinkActive="active">Add Recipe</a>
   </div>
-  <div class="ui segment">
-    <div class="ui basic segment">
-      <div class="ui two fields">
-        <div class="ui input">
-          <input (keyup)="filterRecipe$.next($event.target.value)" type="text" id="filter" name="filter" placeholder="filter recipe..." #filter>
-        </div>
-      </div>
-    </div>
-    <div class="ui basic segment">
-        <div class="ui cards">
-            <app-recipe *ngFor="let localRecipe of recipes |
-            recipeFilter:filterRecipeName"
-            [recipe]="localRecipe"
-            (deleteRecipe)="removeRecipe($event)"></app-recipe>
-        </div>
-    </div>
-  </div>
+  <router-outlet></router-outlet>
+
 </div>
 

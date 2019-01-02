@@ -1,10 +1,15 @@
+require('dotenv').config();
 var express = require('express');
 var router = express.Router();
 let mongoose = require('mongoose');
 let Recipe = mongoose.model('Recipe');
 let Ingredient = mongoose.model('Ingredient');
+let jwt = require('express-jwt');
 
-router.get('/API/recipes/', function(req, res, next) {
+let auth = jwt({ secret: process.env.RECIPE_BACKEND_SECRET });
+
+router.get('/API/recipes/', function (req, res, next) {
+  console.log(process.env.RECIPE_BACKEND_SECRET);
   let query = Recipe.find().populate('ingredients');
   query.exec(function(err, recipes) {
     if (err) {
@@ -14,7 +19,7 @@ router.get('/API/recipes/', function(req, res, next) {
   });
 });
 
-router.post('/API/recipes/', function (req, res, next) {
+router.post('/API/recipes/', auth, function (req, res, next) {
     console.log(req.body);
     console.log(req.body.ingredients);
   Ingredient.create(req.body.ingredients, function(err, ings) {

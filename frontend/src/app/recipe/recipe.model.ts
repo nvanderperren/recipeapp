@@ -7,18 +7,27 @@ export class Recipe {
     private _dateAdded: Date;
     private _ingredients: Ingredient[];
 
+    constructor(name: string, ingredients: Ingredient[] = [],
+        dateAdded: Date = null) {
+        this._name = name;
+        this._ingredients = ingredients;
+        this._dateAdded = dateAdded ? dateAdded : new Date();
+    }
+
     static fromJSON(json: any): Recipe {
-        const record = new Recipe(json.name, json.ingredients.map(Ingredient.fromJSON), json.created);
-        record._id = json._id;
-        return record;
+        const recipe = new Recipe(json.name, json.ingredients.map(Ingredient.fromJSON), json.created);
+        recipe._id = json._id;
+        return recipe;
 
     }
 
-    constructor(name: string, ingredients: Ingredient[] = [],
-        date = null) {
-        this._name = name;
-        this._ingredients = ingredients;
-        this._dateAdded = date ? date : new Date();
+    toJSON() {
+        return {
+            _id: this._id,
+            name: this._name,
+            ingredients: this._ingredients.map(ingredient => ingredient.toJSON()),
+            created: this._dateAdded
+        };
     }
 
     get id(): string {
@@ -39,14 +48,5 @@ export class Recipe {
 
     addIngredient(ingredient: Ingredient) {
         this._ingredients.push(ingredient);
-    }
-
-    toJSON() {
-        return {
-            _id: this._id,
-            name: this._name,
-            ingredients: this._ingredients,
-            date: this._dateAdded
-        };
     }
 }

@@ -5,7 +5,7 @@ let Recipe = mongoose.model('Recipe');
 let Ingredient = mongoose.model('Ingredient');
 
 router.get('/API/recipes/', function(req, res, next) {
-  let query = Recipe.find().populate('ingredient');
+  let query = Recipe.find().populate('ingredients');
   query.exec(function(err, recipes) {
     if (err) {
       return next(err);
@@ -16,7 +16,8 @@ router.get('/API/recipes/', function(req, res, next) {
 
 router.post('/API/recipes/', function (req, res, next) {
     console.log(req.body);
-  Ingredient.create(req.body.ingredient, function(err, ings) {
+    console.log(req.body.ingredients);
+  Ingredient.create(req.body.ingredients, function(err, ings) {
     if (err) {
       return next(err);
     }
@@ -36,7 +37,7 @@ router.post('/API/recipes/', function (req, res, next) {
 });
 
 router.param('recipe', function(req, res, next, id) {
-  let query = Recipe.findById(id).populate('ingredient');
+  let query = Recipe.findById(id).populate('ingredients');
   query.exec(function(err, recipe) {
     if (err) {
       return next(err);

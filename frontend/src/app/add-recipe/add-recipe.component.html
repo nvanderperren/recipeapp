@@ -2,7 +2,8 @@
         <h3 class="ui dividing header">Add recipe</h3>
         <div class="field">
           <label for="name_id">name</label>
-          <input id="name" name="name_id" formControlName='name'>
+          <input id="name" name="name_id" formControlName='name' #spy>
+          <div *ngIf="recipe.get('name').touched && recipe.get('name').errors['required']" class='ui pointing red basic label'>error! this is required</div>
         </div>
 
         <div class="field">
@@ -32,3 +33,6 @@
           add recipe
         </button>
       </form>
+
+      REMOVE {{recipe.value | json }} {{ recipe.valid }}
+      {{ spy.className }}

@@ -6,7 +6,7 @@ var logger = require('morgan');
 
 //database
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/recipeapp', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/recipeapp2');
 require('./models/Recipe');
 require('./models/Ingredient');
 

@@ -1,0 +1,18 @@
+<div class="ui segment">
+    <div *ngIf='errorMsg' class="ui error msg">{{ errorMsg }}</div>
+        <div class="ui basic segment">
+          <div class="ui two fields">
+            <div class="ui input">
+              <input (keyup)="filterRecipe$.next($event.target.value)" type="text" id="filter" name="filter" placeholder="filter recipe..." #filter>
+            </div>
+          </div>
+        </div>
+        <div class="ui basic segment">
+            <div class="ui cards">
+                <app-recipe *ngFor="let localRecipe of recipes |
+                recipeFilter:filterRecipeName"
+                [recipe]="localRecipe"
+                (deleteRecipe)="removeRecipe($event)"></app-recipe>
+            </div>
+        </div>
+      </div>

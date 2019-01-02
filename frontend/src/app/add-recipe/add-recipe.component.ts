@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Recipe } from '../recipe/recipe.model';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Ingredient } from '../ingredient/ingredient.model';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-recipe',
@@ -24,14 +25,16 @@ export class AddRecipeComponent implements OnInit {
             name: ['', [Validators.required, Validators.minLength(2)]],
             ingredients: this.fb.array([this.createIngredients()])
         });
-    }
 
-    /* addRecipe(newRecipeName: HTMLInputElement): boolean {
-        console.log(newRecipeName.value);
-        const recipe = new Recipe(newRecipeName.value);
-        this.newRecipe.emit(recipe);
-        return false;
-    } */
+        this.ingredients.valueChanges
+            .pipe(debounceTime(400), distinctUntilChanged())
+            .subscribe(ingList => {
+                const lastElement = ingList[ingList.length - 1];
+                if (lastElement.ingredientname.length > 2) {
+                    this.ingredients.push(this.createIngredients());
+                }
+            });
+    }
 
     onSubmit() {
         const recipe = new Recipe(this.recipe.value.name);
@@ -41,6 +44,7 @@ export class AddRecipeComponent implements OnInit {
             }
         }
         this.newRecipe.emit(recipe);
+
     }
 
     createIngredients(): FormGroup {

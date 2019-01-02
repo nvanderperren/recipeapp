@@ -23,7 +23,7 @@ export class RecipeDataService {
             );
     }
 
-    addNewRecipe(newRecipe): Observable<Recipe> {
+    addNewRecipe(newRecipe: Recipe): Observable<Recipe> {
         return this.http
             .post(`${this._appUrl}/recipes/`, newRecipe)
             .pipe(

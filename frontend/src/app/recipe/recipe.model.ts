@@ -8,7 +8,7 @@ export class Recipe {
     private _ingredients: Ingredient[];
 
     static fromJSON(json: any): Recipe {
-        const record = new Recipe(json.name, json.ingredients, json.created);
+        const record = new Recipe(json.name, json.ingredients.map(Ingredient.fromJSON), json.created);
         record._id = json._id;
         return record;
 

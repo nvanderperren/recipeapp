@@ -1,4 +1,4 @@
-require('dotenv').configure();
+require('dotenv').config();
 let mongoose = require('mongoose');
 let crypto = require('crypto');
 let jwt = require('jsonwebtoken');

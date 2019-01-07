@@ -1,7 +1,12 @@
 <div class="ui container">
-  <div class="ui two item menu">
+  <div class="ui three item menu">
     <a class='item' routerLinkActive='active' routerLink="/recipe/list">Recipes</a>
     <a class='item' [routerLink]="['/recipe/add']" routerLinkActive="active">Add Recipe</a>
+    <a *ngIf='(currentUser | async) else loginlink' class='item'
+    [routerLink]="['/logout']" routerLinkActive="active">{{ currentUser | async }}</a>
+    <ng-template #loginlink>
+      <a class=item [routerLink]="['/login']" routerLinkActive="active"></a>
+    </ng-template>
   </div>
   <router-outlet></router-outlet>
 

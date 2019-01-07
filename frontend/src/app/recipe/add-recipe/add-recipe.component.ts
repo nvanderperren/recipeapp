@@ -32,7 +32,8 @@ export class AddRecipeComponent implements OnInit {
         this.ingredients.valueChanges
             .pipe(debounceTime(400), distinctUntilChanged())
             .subscribe(ingList => {
-                const lastElement = ingList[ingList.length - 1];
+            if (ingList != null || ingList !== []) {
+              const lastElement = ingList[ingList.length - 1];
                 if (lastElement.ingredientname.length > 2) {
                     this.ingredients.push(this.createIngredients());
                 } else if (ingList.length >= 2) {
@@ -42,6 +43,7 @@ export class AddRecipeComponent implements OnInit {
                         this.ingredients.removeAt(this.ingredients.length - 1);
                         }
                 }
+              }
             });
     }
 
@@ -53,7 +55,7 @@ export class AddRecipeComponent implements OnInit {
             }
         }
         this._reciepeDataService.addNewRecipe(recipe).subscribe(
-            () => { },
+          () => {},
             (error: HttpErrorResponse) => {
                 this.errorMsg = `Error ${error.status} while adding recipe for ${recipe.name}: ${error.error}`;
             }

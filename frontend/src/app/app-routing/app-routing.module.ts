@@ -3,14 +3,16 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule, PreloadingStrategy, PreloadAllModules } from '@angular/router';
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
 import { SelectivePreloadStrategy } from './SelectivePreloadStrategy';
+import { AuthGuardService } from '../user/auth-guard.service';
 
 const appRoutes: Routes = [
   {
     path: 'recipe',
+    canActivate: [ AuthGuardService ],
     loadChildren: 'src/app/recipe/recipe.module#RecipeModule',
     data: { preload: true }
   },
-  // { path: '', redirectTo: 'recipe/list', pathMatch: 'full' },
+  { path: '', redirectTo: 'recipe/list', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent}
 ];
 

@@ -12,6 +12,7 @@ import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipeDataService } from './recipe-data.service';
 import { RecipeResolver } from './recipe-resolver';
+import { httpInterceptorProviders } from '../http-interceptors';
 
 @NgModule({
   imports: [
@@ -28,6 +29,6 @@ import { RecipeResolver } from './recipe-resolver';
     RecipeListComponent,
     RecipeDetailComponent
   ],
-  providers: [ RecipeDataService, RecipeResolver ]
+  providers: [ httpInterceptorProviders, RecipeDataService, RecipeResolver ]
 })
 export class RecipeModule { }

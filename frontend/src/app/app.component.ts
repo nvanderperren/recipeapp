@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AuthenticationService } from './user/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,11 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
 
-    constructor() {}
+  constructor(private authService: AuthenticationService) { }
+
+  get currentUser(): Observable<string> {
+    return this.authService.user$;
+  }
 
 
 

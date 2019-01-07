@@ -32,7 +32,6 @@ export class RecipeListComponent implements OnInit {
     ngOnInit() {
       this._recipeDataService.recipes.subscribe(items => {
         this._recipes = items;
-        items.forEach(item => console.log(item));
       },
             (error: HttpErrorResponse) => {
                 this.errorMsg = `Error ${error.status} while trying to retrieve recipes: ${error.error}`;

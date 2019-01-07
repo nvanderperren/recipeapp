@@ -22,11 +22,8 @@ export class Ingredient {
     private _ingredientUnit: IngredientUnit;
 
     static fromJSON(json): Ingredient {
-        console.log(json);
         const record = new Ingredient(json.name, json.amount, json.unit);
         record._id = json._id;
-        console.log(record._name);
-        console.log(record._ingredientUnit);
         return record;
     }
 

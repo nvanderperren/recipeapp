@@ -1,3 +1,18 @@
-<p>
-  login works!
-</p>
+<div *ngIf='errorMsg' class='ui error message'>{{ errorMsg }}</div>
+<form [formGroup]="user" (ngSubmit)='onSubmit()' class='ui large form segment'>
+  <h3 class='ui header'>Login</h3>
+  <div class="field">
+    <label for="username">username:</label>
+    <input type="text" id="username" formControlName="username">
+    <div class="ui pointing red basic label" *ngIf="user.get('username').errors?.required
+    && user.get('username').touched">username is required</div>
+  </div>
+  <div class=field>
+    <label for="password">password:</label>
+    <input type="password" formControlName="password" id="password">
+    <div class="ui pointing red basic label" *ngIf="user.get('password').errors?.required &&
+    user.get('password').touched">password is required</div>
+  </div>
+  <button type="submit" [disabled]='!user.valid' class='ui positive right floated button'>log in</button>
+</form>
+<a class="item" [routerLink]="['/register']">No account yet? Register</a>

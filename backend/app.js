@@ -13,13 +13,16 @@ require('./models/Ingredient');
 
 require('./config/passport');
 
-mongoose.connect('mongodb://localhost/recipeapp2');
+mongoose.connect(process.env.RECIPE_DATABASE || 'mongodb://localhost/recipeapp2');
 
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+let cors = require('cors');
+app.use(cors({origin: "*"}))
 
 app.use(logger('dev'));
 app.use(bodyParser.json());

@@ -5,7 +5,7 @@
   "homepage": "http://www.github.com/nvanderperren",
   "scripts": {
     "start": "node server",
-    "deploy-backend": "git subtree push --prefix backend recipeapp-backend-nas maseter",
+    "deploy-backend": "git subtree push --prefix backend recipeapp-backend-nas master",
     "build-frontend": "cd frontend && ng build --prod",
     "commit-build-changes": "git add . && git commit -m 'chore(build): files'",
     "deploy-frontend": "npm run build-frontend && npm run copy && npm run commit-build-changes && git subtree push --prefix serve-frontend recipeapp-frontend-nas master",

@@ -27,7 +27,8 @@ router.post('/API/recipes/', auth, function (req, res, next) {
       return next(err);
     }
     let recipe = new Recipe({ name: req.body.name, created: req.body.created });
-    recipe.ingredients = ings;
+		recipe.ingredients = ings;
+		recipe.chef = req.user.username;
     recipe.save(function(err, rec) {
         if (err) {
             console.log(err);

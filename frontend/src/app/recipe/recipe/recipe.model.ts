@@ -5,7 +5,8 @@ export class Recipe {
     private _id: string;
     private _name: string;
     private _dateAdded: Date;
-    private _ingredients: Ingredient[];
+	private _ingredients: Ingredient[];
+	private _chef: String;
 
     constructor(name: string, ingredients: Ingredient[] = [],
         dateAdded: Date = null) {
@@ -16,7 +17,8 @@ export class Recipe {
 
     static fromJSON(json: any): Recipe {
         const recipe = new Recipe(json.name, json.ingredients.map(Ingredient.fromJSON), json.created);
-        recipe._id = json._id;
+			recipe._id = json._id;
+			recipe._chef = json.chef;
         return recipe;
 
     }
@@ -26,7 +28,8 @@ export class Recipe {
             _id: this._id,
             name: this._name,
             ingredients: this._ingredients.map(ingredient => ingredient.toJSON()),
-            created: this._dateAdded
+					created: this._dateAdded,
+						chef: this._chef
         };
     }
 
